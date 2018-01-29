@@ -20,7 +20,8 @@ void test_cxx11_tensor_move()
   Tensor<int,3> tensor1(2, 2, 2);
   Tensor<int,3,RowMajor> tensor2(2, 2, 2);
 
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 8; i++)
+  {
     int x = i / 4;
     int y = (i % 4) / 2;
     int z = i % 2;
@@ -66,7 +67,8 @@ void test_cxx11_tensor_move()
   VERIFY_IS_EQUAL(moved_tensor1.size(), 8);
   VERIFY_IS_EQUAL(moved_tensor2.size(), 8);
 
-  for (int i = 0; i < 8; i++) {
+  for (int i = 0; i < 8; i++)
+  {
     int x = i / 4;
     int y = (i % 4) / 2;
     int z = i % 2;
