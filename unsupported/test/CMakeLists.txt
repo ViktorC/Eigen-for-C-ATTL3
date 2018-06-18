@@ -1,5 +1,5 @@
 # generate split test header file only if it does not yet exist
-# in order to prevent a rebuild everytime cmake is configured
+# in order to prevent a rebuild every time cmake is configured
 if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/split_test_helper.h)
   file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/split_test_helper.h "")
   foreach(i RANGE 1 999)
@@ -41,11 +41,16 @@ else(GOOGLEHASH_FOUND)
   ei_add_property(EIGEN_MISSING_BACKENDS  "GoogleHash, ")
 endif(GOOGLEHASH_FOUND)
 
+
 find_package(Adolc)
 if(ADOLC_FOUND)
   include_directories(${ADOLC_INCLUDES})
   ei_add_property(EIGEN_TESTED_BACKENDS "Adolc, ")
-  ei_add_test(forward_adolc "" ${ADOLC_LIBRARIES})
+  if(EIGEN_TEST_CXX11)
+    ei_add_test(forward_adolc "" ${ADOLC_LIBRARIES})
+  else()
+    message(STATUS "Adolc found, but tests require C++11 mode")
+  endif()
 else(ADOLC_FOUND)
   ei_add_property(EIGEN_MISSING_BACKENDS "Adolc, ")
 endif(ADOLC_FOUND)
